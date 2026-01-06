@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDI 2025 - Juliana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen p-6">
+    <div class="max-w-7xl mx-auto">
+        <a href="index-dental.html" class="inline-flex items-center gap-2 text-cyan-600 hover:text-cyan-700 font-semibold mb-6">
+            ← Voltar para Setor DENTAL
+        </a>
+
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-6">
+            <div class="flex items-start justify-between">
+                <div>
+                    <h1 class="text-4xl font-bold text-slate-800 mb-2">Plano de Desenvolvimento Individual</h1>
+                    <p class="text-3xl font-bold text-cyan-600 mb-1">JULIANA</p>
+                    <p class="text-lg text-slate-600">Setor DENTAL</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm text-slate-500 mb-1">Período Avaliado</div>
+                    <div class="text-2xl font-bold text-slate-800">Jan - Dez 2025</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex gap-2 mb-6 flex-wrap">
+            <button onclick="showTab('overview')" id="tab-overview" class="px-6 py-3 rounded-lg font-semibold transition-all bg-cyan-600 text-white shadow-lg">
+                Visão Geral
+            </button>
+            <button onclick="showTab('performance')" id="tab-performance" class="px-6 py-3 rounded-lg font-semibold transition-all bg-white text-slate-600 hover:bg-slate-50">
+                Performance Detalhada
+            </button>
+            <button onclick="showTab('pdi')" id="tab-pdi" class="px-6 py-3 rounded-lg font-semibold transition-all bg-white text-slate-600 hover:bg-slate-50">
+                Plano de Desenvolvimento
+            </button>
+        </div>
+
+        <div id="content-overview" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg">
+                    <div class="text-sm opacity-90 mb-2">Vidas Vendidas</div>
+                    <div class="text-4xl font-bold mb-1">1.214</div>
+                    <div class="text-sm opacity-90">Total 2025</div>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-6 text-white shadow-lg">
+                    <div class="text-sm opacity-90 mb-2">Implantados</div>
+                    <div class="text-4xl font-bold mb-1">885</div>
+                    <div class="text-sm opacity-90">Clientes ativos</div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg">
+                    <div class="text-sm opacity-90 mb-2">Conv. Lead</div>
+                    <div class="text-4xl font-bold mb-1">34,5%</div>
+                    <div class="text-sm opacity-90">Taxa média</div>
+                </div>
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl p-6 text-white shadow-lg">
+                    <div class="text-sm opacity-90 mb-2">Conv. Implantação</div>
+                    <div class="text-4xl font-bold mb-1">72,9%</div>
+                    <div class="text-sm opacity-90">Vendas→Implantação</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Evolução de Vidas Vendidas</h3>
+                    <canvas id="vendasChart"></canvas>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Taxa de Conversão de Leads</h3>
+                    <canvas id="conversaoChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-slate-800 mb-4">📈 Principais Insights</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                        <div class="font-semibold text-green-800 mb-2">Melhor Mês</div>
+                        <div class="text-sm text-green-700">Janeiro com 186 vidas vendidas</div>
+                    </div>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <div class="font-semibold text-blue-800 mb-2">Alta Conversão</div>
+                        <div class="text-sm text-blue-700">Junho com 43% de conversão de leads</div>
+                    </div>
+                    <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
+                        <div class="font-semibold text-purple-800 mb-2">Implantação Forte</div>
+                        <div class="text-sm text-purple-700">Outubro com 88% de taxa de implantação</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-performance" class="space-y-6 hidden">
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-slate-800 mb-4">Comparativo: Leads vs Conversão</h3>
+                <canvas id="leadsConversaoChart"></canvas>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Vendas vs Implantações</h3>
+                    <canvas id="implantadosChart"></canvas>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Destaques do Ano</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                            <span class="text-green-600 text-xl">🏆</span>
+                            <div>
+                                <div class="font-semibold text-green-800">Janeiro: Melhor Volume</div>
+                                <div class="text-sm text-green-700">186 vidas vendidas com 29% de conversão</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+                            <span class="text-blue-600 text-xl">🎯</span>
+                            <div>
+                                <div class="font-semibold text-blue-800">Julho: Alto Desempenho</div>
+                                <div class="text-sm text-blue-700">178 vidas vendidas com 36% conversão</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-purple-50 rounded-lg">
+                            <span class="text-purple-600 text-xl">💪</span>
+                            <div>
+                                <div class="font-semibold text-purple-800">Implantação Consistente</div>
+                                <div class="text-sm text-purple-700">Média de 72,9% no ano</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-pdi" class="space-y-6 hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-green-800 mb-4">🏆 Pontos Fortes</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                            <div class="w-2 h-2 rounded-full bg-green-500 mt-2"></div>
+                            <div class="text-slate-700">Alta produtividade (1.214 vidas vendidas)</div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                            <div class="w-2 h-2 rounded-full bg-green-500 mt-2"></div>
+                            <div class="text-slate-700">Boa conversão de leads (34,5%)</div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                            <div class="w-2 h-2 rounded-full bg-green-500 mt-2"></div>
+                            <div class="text-slate-700">Volume consistente ao longo do ano</div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                            <div class="w-2 h-2 rounded-full bg-green-500 mt-2"></div>
+                            <div class="text-slate-700">Picos de performance em períodos estratégicos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-orange-800 mb-4">⚠️ Pontos de Atenção</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 p-3 bg-orange-50 rounded-lg">
+                            <div class="w-2 h-2 rounded-full bg-orange-500 mt-2"></div>
+                            <div class="text-slate-700">Taxa de implantação pode melhorar (72,9%)</div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-orange-50 rounded-lg">
+                            <div class="w-2 h-2 rounded-full bg-orange-500 mt-2"></div>
+                            <div class="text-slate-700">Fevereiro e Março com volume mais baixo</div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-orange-50 rounded-lg">
+                            <div class="w-2 h-2 rounded-full bg-orange-500 mt-2"></div>
+                            <div class="text-slate-700">Oportunidade de aumentar conversão de leads</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-cyan-600 to-cyan-700 rounded-2xl shadow-lg p-8 text-white">
+                <h3 class="text-2xl font-bold mb-6">🎯 Objetivos de Desenvolvimento 2026</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-6">
+                        <div class="text-3xl font-bold mb-2">1</div>
+                        <div class="font-semibold text-lg mb-3">Objetivo Comercial</div>
+                        <div class="text-sm opacity-90 mb-2">Aumentar conversão</div>
+                        <div class="text-2xl font-bold">35% → 40%</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-6">
+                        <div class="text-3xl font-bold mb-2">2</div>
+                        <div class="font-semibold text-lg mb-3">Objetivo Implantação</div>
+                        <div class="text-sm opacity-90 mb-2">Melhorar taxa</div>
+                        <div class="text-2xl font-bold">73% → 80%</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-6">
+                        <div class="text-3xl font-bold mb-2">3</div>
+                        <div class="font-semibold text-lg mb-3">Objetivo Volume</div>
+                        <div class="text-sm opacity-90 mb-2">Manter média alta</div>
+                        <div class="text-2xl font-bold">≥ 120 vidas/mês</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const monthlyData = [
+            { mes: 'Jan', vidas: 186, leads: 457, implantados: 131, convLead: 29, convImplant: 70 },
+            { mes: 'Fev', vidas: 89, leads: 255, implantados: 57, convLead: 22, convImplant: 64 },
+            { mes: 'Mar', vidas: 66, leads: 144, implantados: 45, convLead: 31, convImplant: 68 },
+            { mes: 'Abr', vidas: 54, leads: 202, implantados: 46, convLead: 23, convImplant: 85 },
+            { mes: 'Mai', vidas: 94, leads: 246, implantados: 73, convLead: 30, convImplant: 78 },
+            { mes: 'Jun', vidas: 140, leads: 242, implantados: 104, convLead: 43, convImplant: 74 },
+            { mes: 'Jul', vidas: 178, leads: 403, implantados: 145, convLead: 36, convImplant: 81 },
+            { mes: 'Ago', vidas: 118, leads: 259, implantados: 82, convLead: 32, convImplant: 69 },
+            { mes: 'Set', vidas: 0, leads: 0, implantados: 0, convLead: 0, convImplant: 0 },
+            { mes: 'Out', vidas: 116, leads: 265, implantados: 102, convLead: 38, convImplant: 88 },
+            { mes: 'Nov', vidas: 130, leads: 244, implantados: 100, convLead: 41, convImplant: 77 },
+            { mes: 'Dez', vidas: 43, leads: 71, implantados: 0, convLead: 0, convImplant: 0 }
+        ];
+
+        function showTab(tabName) {
+            ['overview', 'performance', 'pdi'].forEach(tab => {
+                document.getElementById(`content-${tab}`).classList.add('hidden');
+                document.getElementById(`tab-${tab}`).classList.remove('bg-cyan-600', 'text-white', 'shadow-lg');
+                document.getElementById(`tab-${tab}`).classList.add('bg-white', 'text-slate-600');
+            });
+            
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).classList.remove('bg-white', 'text-slate-600');
+            document.getElementById(`tab-${tabName}`).classList.add('bg-cyan-600', 'text-white', 'shadow-lg');
+        }
+
+        new Chart(document.getElementById('vendasChart'), {
+            type: 'bar',
+            data: {
+                labels: monthlyData.map(d => d.mes),
+                datasets: [{
+                    label: 'Vidas Vendidas',
+                    data: monthlyData.map(d => d.vidas),
+                    backgroundColor: '#06b6d4'
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: true }
+        });
+
+        new Chart(document.getElementById('conversaoChart'), {
+            type: 'line',
+            data: {
+                labels: monthlyData.map(d => d.mes),
+                datasets: [{
+                    label: 'Conv. Lead (%)',
+                    data: monthlyData.map(d => d.convLead),
+                    borderColor: '#8b5cf6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: true }
+        });
+
+        new Chart(document.getElementById('leadsConversaoChart'), {
+            type: 'line',
+            data: {
+                labels: monthlyData.map(d => d.mes),
+                datasets: [{
+                    label: 'Leads Recebidos',
+                    data: monthlyData.map(d => d.leads),
+                    borderColor: '#f59e0b',
+                    yAxisID: 'y'
+                }, {
+                    label: 'Conv. Lead (%)',
+                    data: monthlyData.map(d => d.convLead),
+                    borderColor: '#8b5cf6',
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { type: 'linear', position: 'left' },
+                    y1: { type: 'linear', position: 'right', grid: { drawOnChartArea: false } }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('implantadosChart'), {
+            type: 'bar',
+            data: {
+                labels: monthlyData.map(d => d.mes),
+                datasets: [{
+                    label: 'Vendidas',
+                    data: monthlyData.map(d => d.vidas),
+                    backgroundColor: '#94a3b8'
+                }, {
+                    label: 'Implantados',
+                    data: monthlyData.map(d => d.implantados),
+                    backgroundColor: '#10b981'
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: true }
+        });
+    </script>
+</body>
+</html>
